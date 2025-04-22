@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -9,19 +10,19 @@ use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller
 {
-    public function index()
+    public function index_funcionario()
     {
         $funcionarios = User::where('role', 'Funcionario')->paginate(10);
         return view('admin.lista_funcionario', compact('funcionarios'));
         
     }
 
-    public function create()
+    public function create_funcionario()
     {
         return view('admin.register_funcionario');
     }
 
-    public function store(Request $request)
+    public function store_funcionario(Request $request)
     {
         {
             $request->validate([
@@ -42,13 +43,13 @@ class FuncionarioController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit_funcionario($id)
     {
         $funcionario = User::findOrFail($id);
-        return view('crud.edit_funcionario', compact('funcionario'));
+        return view('crud.edit_role.edit_funcionario', compact('funcionario'));
     }
 
-    public function update(Request $request, $id)
+    public function update_funcionario(Request $request, $id)
     {
         $funcionario = User::findOrFail($id);
         
@@ -69,11 +70,38 @@ class FuncionarioController extends Controller
         return redirect()->route('admin_funcionario.index')->with('success', 'Funcionario actualizado exitosamente.');
     }
 
-    public function destroy($id)
+    public function destroy_funcionario($id)
     {
         $funcionario = User::findOrFail($id);
         $funcionario->delete();
     
         return redirect()->route('cultivos.index');
+    }
+
+    public function index_certificado()
+    {
+        $certificate = Certificate::where('role', 'Funcionario')->paginate(10);
+        return view('crud.certificate.index_certificate', compact('certificate'));
+    }
+
+    public function create_certificado()
+    {
+        return view('crud.certificate.create_certificate');
+    }
+    public function store_certificado()
+    {
+        
+    }
+    public function edit_certificado($id)
+    {
+       
+    }
+    public function update_certificado(Request $request, $id)
+    {
+        
+    }
+    public function destroy_certificado($id)
+    {
+        
     }
 }

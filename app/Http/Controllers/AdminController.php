@@ -42,7 +42,7 @@ class AdminController extends Controller
     public function edit($id){
 
         $admin = User::findOrFail($id);
-        return view('crud.edit_admin', compact('admin'));
+        return view('crud.edit_role.edit_admin', compact('admin'));
     }
 
     public function update(Request $request, $id)
